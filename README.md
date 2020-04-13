@@ -1,3 +1,13 @@
+<style>
+  .img-container {
+    text-align: center;
+    display: block;
+  }
+</style>
+<span class="img-container">
+  <img src="readme_img/website_logo.png" height="150" align="middle">
+</span>
+
 # Welcome to my Personal Website!
 
 To learn more about who I am and what I do, you're welcome to check out my website [here](http://larryshamalama.github.io/)!
