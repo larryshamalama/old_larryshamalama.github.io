@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="MSc Student in Biostatistics">
+  <meta name="description" content="Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, please let me know if something is not working correctly!">
 
   
-  <link rel="alternate" hreflang="en-us" href="http://larryshamalama.github.io/">
+  <link rel="alternate" hreflang="en-us" href="http://larryshamalama.github.io/post/conda-cheatsheet/">
 
   
 
@@ -210,14 +210,12 @@
 
 
   
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Larry Dong">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/images/icon_hu3fbe3ffa0051cad5ce64445be53360d7_4355_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu3fbe3ffa0051cad5ce64445be53360d7_4355_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="http://larryshamalama.github.io/">
+  <link rel="canonical" href="http://larryshamalama.github.io/post/conda-cheatsheet/">
 
   
   
@@ -231,29 +229,63 @@
   <meta property="twitter:card" content="summary">
   
   <meta property="og:site_name" content="Larry Dong">
-  <meta property="og:url" content="http://larryshamalama.github.io/">
-  <meta property="og:title" content="Larry Dong">
-  <meta property="og:description" content="MSc Student in Biostatistics"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
+  <meta property="og:url" content="http://larryshamalama.github.io/post/conda-cheatsheet/">
+  <meta property="og:title" content="Conda Cheatsheet | Larry Dong">
+  <meta property="og:description" content="Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, please let me know if something is not working correctly!"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
     
+      <meta property="article:published_time" content="2020-04-25T15:04:34-04:00">
+    
+    <meta property="article:modified_time" content="2020-04-25T15:04:34-04:00">
   
 
   
+
+
+    
+
+
+
+
+
+
+  
+
+
+
 
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "http://larryshamalama.github.io/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://larryshamalama.github.io/post/conda-cheatsheet/"
   },
-  "url": "http://larryshamalama.github.io/"
+  "headline": "Conda Cheatsheet",
+  
+  "datePublished": "2020-04-25T15:04:34-04:00",
+  "dateModified": "2020-04-25T15:04:34-04:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Larry Dong"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Larry Dong",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://larryshamalama.github.io/images/icon_hu3fbe3ffa0051cad5ce64445be53360d7_4355_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, please let me know if something is not working correctly!"
 }
 </script>
 
+  
 
   
 
@@ -267,11 +299,11 @@
 
 
 
-  <title>Larry Dong</title>
+  <title>Conda Cheatsheet | Larry Dong</title>
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -366,7 +398,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#about" data-target="#about"><span>Home</span></a>
+          <a class="nav-link " href="/#about"><span>Home</span></a>
         </li>
 
         
@@ -395,7 +427,7 @@
         
 
         <li class="nav-item">
-          <a class="nav-link " href="/#posts" data-target="#posts"><span>Posts</span></a>
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
         </li>
 
         
@@ -441,66 +473,7 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-<span class="js-widget-page d-none"></span>
-
-
-
-
-
-  
-  
-  
-  
-
-
-
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="about" class="home-section wg-about   "  >
-    <div class="container">
-      
-
-
-
+  <article class="article">
 
   
 
@@ -513,410 +486,20 @@
 
 
 
-<div class="row">
-  <div class="col-12 col-lg-4">
-    <div id="profile">
 
-      
-      
-      <img class="avatar avatar-circle" src="/authors/admin/avatar_hu6166b7eed01b4aa3e39b31388d183d07_64182_270x270_fill_q90_lanczos_center.jpg" alt="Larry Dong">
-      
 
-      <div class="portrait-title">
-        <h2>Larry Dong</h2>
-        <h3>MSc Student in Biostatistics</h3>
+  
 
-        
-        <h3>
-          <a href="https://www.mcgill.ca/epi-biostat-occh/" target="_blank" rel="noopener">
-          <span>McGill University</span>
-          </a>
-        </h3>
-        
-      </div>
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Conda Cheatsheet</h1>
 
-      <ul class="network-icon" aria-hidden="true">
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-        <li>
-          <a href="mailto:larry.dong@mail.mcgill.ca" >
-            <i class="fas fa-envelope big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://github.com/larryshamalama" target="_blank" rel="noopener">
-            <i class="fab fa-github big-icon"></i>
-          </a>
-        </li>
-        
-        
-        
-        
-          
-        
-        
-        
-        
-        
-          
-        
-        <li>
-          <a href="https://www.linkedin.com/in/larry-dong/" target="_blank" rel="noopener">
-            <i class="fab fa-linkedin big-icon"></i>
-          </a>
-        </li>
-        
-      </ul>
+  
 
-    </div>
-  </div>
-  <div class="col-12 col-lg-8">
-
+  
     
-    <h1>Hi! I&rsquo;m Larry</h1>
-
-    <p>I am graduate student pursuing a joint Master&rsquo;s degree in Biostatistics at McGill University and in Public Health Data Science at the University of Bordeaux. I am jointly supervised by 
-<a href="https://www.ericamoodie.com/" target="_blank" rel="noopener">Dr. Erica Moodie</a> and 
-<a href="https://www.bordeaux-population-health.center/profile/rodolphe-thiebaut/" target="_blank" rel="noopener">Dr. Rodolphe Thiébaut</a>. At the moment, my research interests include dynamic treatment regimes (DTR), causal inference and image analysis.</p>
-<p>Upon completion of my Master&rsquo;s program, I look forward to joining the Dalla Lana School of Public Health at the University of Toronto as a PhD student.</p>
-
-
-    <div class="row">
-
-      
-      <div class="col-md-5">
-        <h3>Interests</h3>
-        <ul class="ul-interests">
-          
-          <li>Dynamic Treatment Regimes</li>
-          
-          <li>Causal Inference</li>
-          
-          <li>Image Analysis</li>
-          
-          <li>Biostatistics</li>
-          
-        </ul>
-      </div>
-      
-
-      
-      <div class="col-md-7">
-        <h3>Education</h3>
-        <ul class="ul-edu fa-ul">
-          
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">(Incoming) PhD in Biostatistics</p>
-              <p class="institution">University of Toronto</p>
-            </div>
-          </li>
-          
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">MSc in Biostatistics, 2020 (Expected)</p>
-              <p class="institution">McGill University</p>
-            </div>
-          </li>
-          
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">MSc in Public Health Data Science, 2020 (Expected)</p>
-              <p class="institution">University of Bordeaux</p>
-            </div>
-          </li>
-          
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">BSc in Mathematics, 2018</p>
-              <p class="institution">McGill University</p>
-            </div>
-          </li>
-          
-        </ul>
-      </div>
-      
-
-    </div>
-  </div>
-</div>
-
-    </div>
-  </section>
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="experience" class="home-section wg-experience   "  >
-    <div class="container">
-      
-
-
-
-<div class="row">
-  <div class="col-12 col-lg-4 section-heading">
-    <h1>Experience</h1>
-    
-  </div>
-  <div class="col-12 col-lg-8">
-    
-
-    
-    
-    
-    <div class="row experience">
-      
-      <div class="col-auto text-center flex-column d-none d-sm-flex">
-        <div class="row h-50">
-          <div class="col ">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-        </div>
-        <div class="m-2">
-          <span class="badge badge-pill border exp-fill">&nbsp;</span>
-        </div>
-        <div class="row h-50">
-          <div class="col border-right">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-        </div>
-      </div>
-      
-      <div class="col py-2">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title exp-title text-muted mt-0 mb-1">EPIB 612 Teaching Assistant</h4>
-            <h4 class="card-title exp-company text-muted my-0">McGill Department of Biostatistics, Epidemiology and Public Health</h4>
-            <div class="text-muted exp-meta">
-              Jan 2020 –
-              
-                Present
-              
-              
-                <span class="middot-divider"></span>
-                <span>Montreal</span>
-              
-            </div>
-            <div class="card-text">EPIB 621 &ndash; Data Analysis in the Health Sciences</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="row experience">
-      
-      <div class="col-auto text-center flex-column d-none d-sm-flex">
-        <div class="row h-50">
-          <div class="col border-right">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-        </div>
-        <div class="m-2">
-          <span class="badge badge-pill border ">&nbsp;</span>
-        </div>
-        <div class="row h-50">
-          <div class="col ">&nbsp;</div>
-          <div class="col">&nbsp;</div>
-        </div>
-      </div>
-      
-      <div class="col py-2">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title exp-title text-muted mt-0 mb-1">MATH 140 Teaching Assistant</h4>
-            <h4 class="card-title exp-company text-muted my-0">McGill Department of Mathematics and Statistics</h4>
-            <div class="text-muted exp-meta">
-              Sep 2018 –
-              
-                Dec 2018
-              
-              
-                <span class="middot-divider"></span>
-                <span>Montreal</span>
-              
-            </div>
-            <div class="card-text">MATH 140 &ndash; Calculus 1</div>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    
-  </div>
-</div>
-
-    </div>
-  </section>
-
-  
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-
-  <section id="posts" class="home-section wg-pages   "  >
-    <div class="container">
-      
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-<div class="row">
-  <div class="col-12 col-lg-4 section-heading">
-    <h1>Recent Posts</h1>
-    
-  </div>
-  <div class="col-12 col-lg-8">
-
-    
-
-    
-      
-        
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-<div class="media stream-item">
-  <div class="media-body">
-
-    <h3 class="article-title mb-0 mt-0">
-      <a href="/post/conda-cheatsheet/" >Conda Cheatsheet</a>
-    </h3>
-
-    
-    <div class="article-style">
-      Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, please let me know if something is not working correctly!
-    </div>
-    
-
-    <div class="stream-meta article-metadata">
-
-      
-
-      
-        
 
 
 <div class="article-metadata">
@@ -952,30 +535,192 @@
 
 </div>
 
-      
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, <em>please</em> let me know if something is not working correctly!</p>
+<h2 id="what-is-anaconda">What is Anaconda?</h2>
+<p>Simply put, Anaconda is an open-source package management system for Python. One of its most popular applications, Jupyter, is commonly used for data science related projects. In this article, I have tried to detail the steps from creating a virtual environment in Anaconda to using it in your Jupyter notebooks.</p>
+<h3 id="installing-anaconda">Installing Anaconda</h3>
+<ol>
+<li>Go to the Anaconda website 
+<a href="https://www.anaconda.com/products/individual" target="_blank" rel="noopener">here</a>.</li>
+<li>Click on the appropriate distribution (Mac or Linux) and download the Anaconda installer for <strong>Python 3.7</strong>.</li>
+<li>Open Terminal and execute the following commands:</li>
+</ol>
+<pre><code>cd ~/Downloads
+chmod +x Anaconda3-2020.02-MacOSX-x86_64.sh
+./Anaconda3-2020.02-MacOSX-x86_64.sh
+</code></pre>
+<p><em><strong>If you&rsquo;re on a Linux distribution, the downloaded file has a different name, so execute the commands above with the downloaded file name.</strong></em></p>
+<p>❗ You should reset your Terminal window by simply restarting it.</p>
+<h2 id="setting-up-your-virtual-environment">Setting up your virtual environment</h2>
+<p>Creating a virtual environment for your Python project has many benefits, including version control for you and your collaborators and managing sets of installed packages for separate projects. Here are 5 steps to creating your Anaconda virtual environment and using it in a Jupyter notebook.</p>
+<h3 id="1---creating-the-virtual-environment">1 - Creating the virtual environment</h3>
+<pre><code>conda create --name YOUR_ENV_NAME python=3.7
+</code></pre>
+<p>The command above specifies Python version in the environment to be 3.7, since this is the most stable and updated version at the moment. However, you can use a different version if you prefer.</p>
+<h3 id="2---creating-a-terminal-shortcut">2 - Creating a Terminal Shortcut</h3>
+<p>My preference is to create a Terminal shortcut to activate the environment.</p>
+<pre><code>echo &quot;alias SHORTCUT_COMMAND='conda activate YOUR_ENV_NAME'&quot; | cat - ~/.bash_profile &gt; ~/.bash_profile
+source ~/.bash_profile
+</code></pre>
+<p><em><strong>If you are on a Linux distribution, replace <code>~/.bash_profile</code> by <code>~/.bashrc</code> due to the difference in file names.</strong></em></p>
+<h3 id="3---activating-your-environment">3 - Activating your environment</h3>
+<p>With the shortcut created using the commands above, you can now activate the environment by simply typing its name in Terminal!</p>
+<pre><code>YOUR_ENV_NAME
+</code></pre>
+<h3 id="4---installing-packages">4 - Installing packages</h3>
+<p>Say you want to install some Python packages called <code>package1</code>, <code>package2</code> and <code>package3</code>. You can use the code below to do so.</p>
+<pre><code>conda install -n YOUR_ENV_NAME package1 package2 package3
+</code></pre>
+<h3 id="5---adding-the-environment-to-jupyter">5 - Adding the environment to Jupyter</h3>
+<p>Often times, it would be desirable to be able to access the environment in a Jupyter notebook, which is often used for coding in Python (it&rsquo;s definitely my favorite!). To add your newly created environment to Jupyter, run the following commands in Terminal.</p>
+<pre><code>conda install -n YOUR_ENV_NAME ipykernel -c conda-forge
+python -m ipykernel install --user --name YOUR_ENV_NAME
+</code></pre>
+<h2 id="ready-to-code">Ready to code!</h2>
+<p>Your environment should be ready to use in your Jupyter notebooks!</p>
+
     </div>
 
     
 
-  </div>
-  <div class="ml-3">
-    
-    
-  </div>
-</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/admin/avatar_hu6166b7eed01b4aa3e39b31388d183d07_64182_270x270_fill_q90_lanczos_center.jpg" alt="Larry Dong">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="http://larryshamalama.github.io/">Larry Dong</a></h5>
+      <h6 class="card-subtitle">MSc Student in Biostatistics</h6>
+      <p class="card-text">Statistics and data analysis are my strengths, but medical research is my passion.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
       
     
-
     
-
-  </div>
-</div>
+    
+    
+    
+    <li>
+      <a href="mailto:larry.dong@mail.mcgill.ca" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/larryshamalama" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/larry-dong/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+</ul>
 
     </div>
-  </section>
+  </div>
 
 
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
 
       
 

@@ -12,5 +12,56 @@
       <link>http://larryshamalama.github.io/</link>
     </image>
     
+    <item>
+      <title>Conda Cheatsheet</title>
+      <link>http://larryshamalama.github.io/post/conda-cheatsheet/</link>
+      <pubDate>Sat, 25 Apr 2020 15:04:34 -0400</pubDate>
+      <guid>http://larryshamalama.github.io/post/conda-cheatsheet/</guid>
+      <description>&lt;p&gt;Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, &lt;em&gt;please&lt;/em&gt; let me know if something is not working correctly!&lt;/p&gt;
+&lt;h2 id=&#34;what-is-anaconda&#34;&gt;What is Anaconda?&lt;/h2&gt;
+&lt;p&gt;Simply put, Anaconda is an open-source package management system for Python. One of its most popular applications, Jupyter, is commonly used for data science related projects. In this article, I have tried to detail the steps from creating a virtual environment in Anaconda to using it in your Jupyter notebooks.&lt;/p&gt;
+&lt;h3 id=&#34;installing-anaconda&#34;&gt;Installing Anaconda&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Go to the Anaconda website 
+&lt;a href=&#34;https://www.anaconda.com/products/individual&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Click on the appropriate distribution (Mac or Linux) and download the Anaconda installer for &lt;strong&gt;Python 3.7&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Open Terminal and execute the following commands:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;cd ~/Downloads
+chmod +x Anaconda3-2020.02-MacOSX-x86_64.sh
+./Anaconda3-2020.02-MacOSX-x86_64.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;If you&amp;rsquo;re on a Linux distribution, the downloaded file has a different name, so execute the commands above with the downloaded file name.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;❗ You should reset your Terminal window by simply restarting it.&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-your-virtual-environment&#34;&gt;Setting up your virtual environment&lt;/h2&gt;
+&lt;p&gt;Creating a virtual environment for your Python project has many benefits, including version control for you and your collaborators and managing sets of installed packages for separate projects. Here are 5 steps to creating your Anaconda virtual environment and using it in a Jupyter notebook.&lt;/p&gt;
+&lt;h3 id=&#34;1---creating-the-virtual-environment&#34;&gt;1 - Creating the virtual environment&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;conda create --name YOUR_ENV_NAME python=3.7
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The command above specifies Python version in the environment to be 3.7, since this is the most stable and updated version at the moment. However, you can use a different version if you prefer.&lt;/p&gt;
+&lt;h3 id=&#34;2---creating-a-terminal-shortcut&#34;&gt;2 - Creating a Terminal Shortcut&lt;/h3&gt;
+&lt;p&gt;My preference is to create a Terminal shortcut to activate the environment.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo &amp;quot;alias SHORTCUT_COMMAND=&#39;conda activate YOUR_ENV_NAME&#39;&amp;quot; | cat - ~/.bash_profile &amp;gt; ~/.bash_profile
+source ~/.bash_profile
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;&lt;strong&gt;If you are on a Linux distribution, replace &lt;code&gt;~/.bash_profile&lt;/code&gt; by &lt;code&gt;~/.bashrc&lt;/code&gt; due to the difference in file names.&lt;/strong&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3---activating-your-environment&#34;&gt;3 - Activating your environment&lt;/h3&gt;
+&lt;p&gt;With the shortcut created using the commands above, you can now activate the environment by simply typing its name in Terminal!&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;YOUR_ENV_NAME
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;4---installing-packages&#34;&gt;4 - Installing packages&lt;/h3&gt;
+&lt;p&gt;Say you want to install some Python packages called &lt;code&gt;package1&lt;/code&gt;, &lt;code&gt;package2&lt;/code&gt; and &lt;code&gt;package3&lt;/code&gt;. You can use the code below to do so.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install -n YOUR_ENV_NAME package1 package2 package3
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;5---adding-the-environment-to-jupyter&#34;&gt;5 - Adding the environment to Jupyter&lt;/h3&gt;
+&lt;p&gt;Often times, it would be desirable to be able to access the environment in a Jupyter notebook, which is often used for coding in Python (it&amp;rsquo;s definitely my favorite!). To add your newly created environment to Jupyter, run the following commands in Terminal.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install -n YOUR_ENV_NAME ipykernel -c conda-forge
+python -m ipykernel install --user --name YOUR_ENV_NAME
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;ready-to-code&#34;&gt;Ready to code!&lt;/h2&gt;
+&lt;p&gt;Your environment should be ready to use in your Jupyter notebooks!&lt;/p&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>

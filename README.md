@@ -5,7 +5,7 @@
   }
 </style>
 <span class="img-container">
-  <img src="readme_img/website_logo.png" height="150" align="middle">
+  <img src="custom_img/website_logo.png" height="150" align="middle">
 </span>
 
 # Welcome to my Personal Website!
