@@ -559,7 +559,7 @@
 
     <div class="article-style">
       <p>Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, <em>please</em> let me know if something is not working correctly!</p>
-<h2 id="what-is-anaconda">What is Anaconda?</h2>
+<h1 id="what-is-anaconda">What is Anaconda?</h1>
 <p>Simply put, Anaconda is an open-source package management system for Python. One of its most popular applications, Jupyter, is commonly used for data science related projects. In this article, I have tried to detail the steps from creating a virtual environment in Anaconda to using it in your Jupyter notebooks.</p>
 <h3 id="installing-anaconda">Installing Anaconda</h3>
 <ol>
@@ -574,10 +574,10 @@ chmod +x Anaconda3-2020.02-MacOSX-x86_64.sh
 </code></pre>
 <p><em><strong>If you&rsquo;re on a Linux distribution, the downloaded file has a different name, so execute the commands above with the downloaded file name.</strong></em></p>
 <p>❗ You should reset your Terminal window by simply restarting it.</p>
-<h2 id="setting-up-your-virtual-environment">Setting up your virtual environment</h2>
+<h1 id="setting-up-your-virtual-environment">Setting up your virtual environment</h1>
 <p>Creating a virtual environment for your Python project has many benefits, including version control for you and your collaborators and managing sets of installed packages for separate projects. Here are 5 steps to creating your Anaconda virtual environment and using it in a Jupyter notebook.</p>
 <h3 id="1---creating-the-virtual-environment">1 - Creating the virtual environment</h3>
-<pre><code>conda create --name YOUR_ENV_NAME python=3.7
+<pre><code>conda create -n YOUR_ENV_NAME python=3.7
 </code></pre>
 <p>The command above specifies Python version in the environment to be 3.7, since this is the most stable and updated version at the moment. However, you can use a different version if you prefer.</p>
 <h3 id="2---creating-a-terminal-shortcut">2 - Creating a Terminal Shortcut</h3>
@@ -599,8 +599,27 @@ source ~/.bash_profile
 <pre><code>conda install -n YOUR_ENV_NAME ipykernel -c conda-forge
 python -m ipykernel install --user --name YOUR_ENV_NAME
 </code></pre>
-<h2 id="ready-to-code">Ready to code!</h2>
+<h1 id="ready-to-code">Ready to code!</h1>
 <p>Your environment should be ready to use in your Jupyter notebooks!</p>
+</br>
+<h1 id="other-hopefully-useful-things">Other (hopefully) useful things</h1>
+<h3 id="locating-your-virtual-environment">Locating your virtual environment</h3>
+<p>My preference is to go the folder in which your environment is installed and simply removing it. To find the directory in which your virtual environment is located, you can do:</p>
+<pre><code>source activate YOUR_ENV_NAME # to activate your environment
+which python
+</code></pre>
+<p>You should get an output under the following format: <code>SOME_DIRECTORY/YOUR_ENV_NAME/bin/python</code>. The directory in which your environment is located is simply <code>SOME_DIRECTORY</code>.</p>
+<h5 id="example">Example</h5>
+<p>When I run <code>which python</code> after activating my environment called <code>ml</code>, I obtain <code>/Users/larry/anaconda3/envs/ml/bin/python</code>. It follows that the directory where my conda environments are located is <code>Users/larry/anaconda3/envs/</code>.</p>
+<h3 id="deleting-your-environment">Deleting your environment</h3>
+<p>Once you have located your environment (see above) and found the directory in which your environments are located and that we will call <code>SOME_DIRECTORY</code>. To delete your environment, run the following commands:</p>
+<pre><code>cd SOME_DIRECTORY
+rm -rf YOUR_ENV_NAME
+</code></pre>
+<h3 id="removing-your-environment-from-jupyter">Removing your environment from Jupyter</h3>
+<p>Although you have deleted your environment and it no longer exists, for some reason the option to select it as a kernel is still available in your Jupyter notebook, although selecting it won&rsquo;t work. To remove the environment as an option in the Jupyter notebook, run the following.</p>
+<pre><code>jupyter kernelspec uninstall YOUR_ENV_NAME
+</code></pre>
 
     </div>
 
