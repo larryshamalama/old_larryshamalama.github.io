@@ -522,7 +522,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    3 min read
+    4 min read
   </span>
   
 
@@ -599,6 +599,10 @@ source ~/.bash_profile
 <p>Often times, it would be desirable to be able to access the environment in a Jupyter notebook, which is often used for coding in Python (it&rsquo;s definitely my favorite!). To add your newly created environment to Jupyter, run the following commands in Terminal.</p>
 <pre><code>conda install -n YOUR_ENV_NAME ipykernel -c conda-forge
 python -m ipykernel install --user --name YOUR_ENV_NAME
+</code></pre>
+<h5 id="running-into-command-not-found-jupyter">Running into <code>command not found: jupyter</code></h5>
+<p>One of the packages that you may have to install is jupyter itself!</p>
+<pre><code>conda install -n YOUR_ENV_NAME -c conda-forge jupyterlab
 </code></pre>
 <h1 id="ready-to-code">Ready to code!</h1>
 <p>Your environment should be ready to use in your Jupyter notebooks!</p>

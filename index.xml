@@ -59,6 +59,10 @@ source ~/.bash_profile
 &lt;pre&gt;&lt;code&gt;conda install -n YOUR_ENV_NAME ipykernel -c conda-forge
 python -m ipykernel install --user --name YOUR_ENV_NAME
 &lt;/code&gt;&lt;/pre&gt;
+&lt;h5 id=&#34;running-into-command-not-found-jupyter&#34;&gt;Running into &lt;code&gt;command not found: jupyter&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;One of the packages that you may have to install is jupyter itself!&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;conda install -n YOUR_ENV_NAME -c conda-forge jupyterlab
+&lt;/code&gt;&lt;/pre&gt;
 &lt;h1 id=&#34;ready-to-code&#34;&gt;Ready to code!&lt;/h1&gt;
 &lt;p&gt;Your environment should be ready to use in your Jupyter notebooks!&lt;/p&gt;
 &lt;/br&gt;
