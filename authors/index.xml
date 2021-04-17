@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors | Larry Dong</title>
-    <link>http://larryshamalama.github.io/authors/</link>
-      <atom:link href="http://larryshamalama.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://www.larrydong.com/authors/</link>
+      <atom:link href="https://www.larrydong.com/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Authors</title>
-      <link>http://larryshamalama.github.io/authors/</link>
+      <link>https://www.larrydong.com/authors/</link>
     </image>
     
   </channel>
