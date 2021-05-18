@@ -5,12 +5,21 @@
     <link>https://www.larrydong.com/</link>
       <atom:link href="https://www.larrydong.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Larry Dong</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright><lastBuildDate>Sat, 25 Apr 2020 15:04:34 -0400</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright><lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Larry Dong</title>
       <link>https://www.larrydong.com/</link>
     </image>
+    
+    <item>
+      <title>End of a Remote First Year of PhD Studies, Beginning of GSoC2021</title>
+      <link>https://www.larrydong.com/gsoc2021/cb-week1/</link>
+      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.larrydong.com/gsoc2021/cb-week1/</guid>
+      <description>&lt;p&gt;test&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Conda Environments and Jupyter Notebooks</title>
