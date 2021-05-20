@@ -13,12 +13,12 @@
     </image>
     
     <item>
-      <title>Conda Environments and Jupyter Notebooks</title>
+      <title>🐍 Conda Environments and Jupyter Notebooks</title>
       <link>https://www.larrydong.com/post/conda-cheatsheet/</link>
       <pubDate>Sat, 25 Apr 2020 15:04:34 -0400</pubDate>
       <guid>https://www.larrydong.com/post/conda-cheatsheet/</guid>
       <description>&lt;p&gt;Here is a cheatsheet in using Anaconda with some of my personal preferences that I have retained. If you do follow this, &lt;em&gt;please&lt;/em&gt; let me know if something is not working correctly!&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;anaconda.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;img src=&#34;anaconda.png&#34; width=65%&gt;
 &lt;h1 id=&#34;what-is-anaconda&#34;&gt;What is Anaconda?&lt;/h1&gt;
 &lt;p&gt;Simply put, Anaconda is an open-source package management system for Python. One of its most popular applications, Jupyter, is commonly used for data science related projects. In this article, I have tried to detail the steps from creating a virtual environment in Anaconda to using it in your Jupyter notebooks.&lt;/p&gt;
 &lt;h3 id=&#34;installing-anaconda&#34;&gt;Installing Anaconda&lt;/h3&gt;

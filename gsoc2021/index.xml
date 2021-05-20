@@ -5,7 +5,7 @@
     <link>https://www.larrydong.com/gsoc2021/</link>
       <atom:link href="https://www.larrydong.com/gsoc2021/index.xml" rel="self" type="application/rss+xml" />
     <description>GSoC2021</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright><lastBuildDate>Tue, 18 May 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>GSoC2021</title>
@@ -13,11 +13,19 @@
     </image>
     
     <item>
-      <title>End of a Remote First Year of PhD Studies, Beginning of GSoC2021</title>
+      <title>🚀 End of a Remote First Year PhD, Beginning of GSoC2021</title>
       <link>https://www.larrydong.com/gsoc2021/cb-week0/</link>
-      <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 19 May 2021 00:00:00 +0000</pubDate>
       <guid>https://www.larrydong.com/gsoc2021/cb-week0/</guid>
-      <description>&lt;p&gt;Following&lt;/p&gt;
+      <description>&lt;p&gt;The first year of my PhD studies had, in all honesty, some rather unexpected challenges. Given the ongoing pandemic, my move to a new city for my PhD studies was put on hold. Instead, I decided to spend more quality time with one of my good friends (he&amp;rsquo;s a great cook!) and my parents. As spring was looming in, I quickly ran out of motivation to work on assignments and write my end-of-term report, but, with the help of my support network and all things considered, my first year ended well!&lt;/p&gt;
+&lt;p&gt;With summer right around the corner, I was eager for some good news and an opportunity to look forward to. On Monday, May 17 right before 2pm, I received the following email and nearly floored with happiness:&lt;/p&gt;
+&lt;img src=&#34;acceptance.png&#34; width=&#34;75%&#34;&gt;
+&lt;p&gt;and I had to immediately this amazing news with my parents and my friends! I am extremely grateful for the Google Summer of Code (GSoC) opportunity for the many reasons. Firstly, I will learn more about open source development and probabilistic programming from well-established mentors. Secondly, this practical opportunity would complement well my summer studying for my PhD comprehensive exams. Last but not least, I&amp;rsquo;m being paid! 😅&lt;/p&gt;
+&lt;p&gt;Under the mentorship of 
+&lt;a href=&#34;https://twitter.com/fonnesbeck&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Christopher Fonnesbeck&lt;/a&gt; and 
+&lt;a href=&#34;https://www.austinrochford.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Austin Rochford&lt;/a&gt;, my GSoC project centers around extending the 
+&lt;a href=&#34;https://github.com/pymc-devs/pymc3&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PyMC3&lt;/a&gt; package with a Dirichlet process submodule. PyMC3 is a probabilistic framework in Python that allows users to fit Bayesian models via MCMC sampling. There is a growing interest in Bayesian nonparametric methods for fitting statistical models without specifying its parametric form. Dirichlet processes can be used as priors for probability distributions themselves. How exactly? I shall find out in the next three weeks of community bonding!&lt;/p&gt;
+&lt;p&gt;In the coming months, I look forward to getting to know the PyMC3 community, reading more about Bayesian nonparametric statistics and, above all, learning from my mentors. Stay tuned for more!&lt;/p&gt;
 </description>
     </item>
     
