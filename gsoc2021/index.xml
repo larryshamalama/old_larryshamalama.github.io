@@ -13,11 +13,27 @@
     </image>
     
     <item>
-      <title>git rebase, git commit, git explain me how to contribue to open source</title>
-      <link>https://www.larrydong.com/gsoc2021/community-bonding-week-3/</link>
+      <title>The slump: git rebase, git commit, git teach me how to contribute to open source</title>
+      <link>https://www.larrydong.com/gsoc2021/community-bonding-week-3-4/</link>
       <pubDate>Thu, 03 Jun 2021 00:00:00 +0000</pubDate>
-      <guid>https://www.larrydong.com/gsoc2021/community-bonding-week-3/</guid>
-      <description></description>
+      <guid>https://www.larrydong.com/gsoc2021/community-bonding-week-3-4/</guid>
+      <description>&lt;p&gt;The rest of community bonding was spent interacting with the PyMC developpers and, above all, learning how to better use GitHub. On the statistical theory side, things are progressing faster. Admittedly, on the coding side, I have come to full realization that my foundation is more lacking and there is a lot to learn.&lt;/p&gt;
+&lt;p&gt;Emotionally, it has sometimes been difficult to accept my slow progress and feeling completely lost&amp;hellip; I feel that I am currently in a slump and am not too sure where to even look for directions. There are many weeks left, so lots of room to better myself!&lt;/p&gt;
+&lt;p&gt;Here are some lessons and some areas that I need to work on for the coming weeks.&lt;/p&gt;
+&lt;h4 id=&#34;1---managing-a-better-git-workflow&#34;&gt;1 - Managing a better Git workflow&lt;/h4&gt;
+&lt;p&gt;I &lt;em&gt;will&lt;/em&gt; be working on different branches at a time. For instance, my implementation of a DP submodule should be done independently from addressing PyMC3 issues. Familiarizing myself with how to use &lt;code&gt;git merge&lt;/code&gt;, &lt;code&gt;git reset&lt;/code&gt; and &lt;code&gt;git rebase&lt;/code&gt; will be very important to ensure properly flow as as aspiring developper. For now, what I have gathered is summarized in the following steps as I am working on my branch &lt;code&gt;dp-gsoc&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;1 - &lt;code&gt;git commit&lt;/code&gt; my progress. I don&amp;rsquo;t have to push to &lt;code&gt;origin&lt;/code&gt; yet!
+2 - &lt;code&gt;git checkout main&lt;/code&gt; to go back to main and
+3 - &lt;code&gt;git pull upstream&lt;/code&gt; to update my local repository with respect to &lt;code&gt;upstream&lt;/code&gt;. It would be also nice to push to &lt;code&gt;origin main&lt;/code&gt; with a simple &lt;code&gt;git push -u origin main&lt;/code&gt;.
+4 - &lt;code&gt;git checkout dp-gsoc&lt;/code&gt; followed by
+5 - &lt;code&gt;git rebase main&lt;/code&gt; to update my local branch with the updates from &lt;code&gt;upstream main&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;This is a failed-proof method since I am currently working on a brand new submodule, so I don&amp;rsquo;t expect to encounter any merge conflicts 😅&lt;/p&gt;
+&lt;h4 id=&#34;2---asking-questions&#34;&gt;2 - Asking questions&lt;/h4&gt;
+&lt;p&gt;Asking the right and right number of questions has also not been easy. I can spend countless hours asking PyMC developpers and contributors for pointers and answers, but, in many instances, I just often have a feeling that my questions are too &amp;ldquo;basic&amp;rdquo;. This &amp;ldquo;imposter syndrome&amp;rdquo; feeling is not fun, but I try very hard to go through all (if not most) of the documentation before asking any questions. However, if I&amp;rsquo;m stuck for any longer, I feel that I should not hesitate.&lt;/p&gt;
+&lt;h4 id=&#34;3---knowing-what-i-dont-need-to-know&#34;&gt;3 - Knowing what I don&amp;rsquo;t need to know&lt;/h4&gt;
+&lt;p&gt;When it came to understanding the codebase, it was initially difficult for me to discern what I &lt;em&gt;need&lt;/em&gt; to know for my project versus what I don&amp;rsquo;t need to know. For instance, PyMC3 is built on top 
+&lt;a href=&#34;https://github.com/aesara-devs/aesara&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;aesara&lt;/a&gt; which, apparently, not everybody understands to its full extent. And that&amp;rsquo;s more than okay to keep working with my GSoC project :&#39;)&lt;/p&gt;
+</description>
     </item>
     
     <item>
