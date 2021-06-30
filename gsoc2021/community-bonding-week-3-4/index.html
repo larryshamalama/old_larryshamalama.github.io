@@ -233,7 +233,7 @@
   
   <meta property="og:site_name" content="Larry Dong">
   <meta property="og:url" content="https://www.larrydong.com/gsoc2021/community-bonding-week-3-4/">
-  <meta property="og:title" content="The slump: git rebase, git commit, git teach me how to contribute to open source | Larry Dong">
+  <meta property="og:title" content="git rebase, git commit, git teach me how to contribute to open source | Larry Dong">
   <meta property="og:description" content="One line of code per headscratch per hour staring at my IDE"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
@@ -259,7 +259,7 @@
 
 
 
-  <title>The slump: git rebase, git commit, git teach me how to contribute to open source | Larry Dong</title>
+  <title>git rebase, git commit, git teach me how to contribute to open source | Larry Dong</title>
 
 </head>
 
@@ -483,7 +483,7 @@
   
   
 <div class="article-container pt-3">
-  <h1>The slump: git rebase, git commit, git teach me how to contribute to open source</h1>
+  <h1>git rebase, git commit, git teach me how to contribute to open source</h1>
 
   
   <p class="page-subtitle">Community Bonding Weeks 3 and 4</p>
@@ -549,11 +549,13 @@
 <p>Here are some lessons and some areas that I need to work on for the coming weeks.</p>
 <h4 id="1---managing-a-better-git-workflow">1 - Managing a better Git workflow</h4>
 <p>I <em>will</em> be working on different branches at a time. For instance, my implementation of a DP submodule should be done independently from addressing PyMC3 issues. Familiarizing myself with how to use <code>git merge</code>, <code>git reset</code> and <code>git rebase</code> will be very important to ensure properly flow as as aspiring developper. For now, what I have gathered is summarized in the following steps as I am working on my branch <code>dp-gsoc</code>:</p>
-<p>1 - <code>git commit</code> my progress. I don&rsquo;t have to push to <code>origin</code> yet!
-2 - <code>git checkout main</code> to go back to main and
-3 - <code>git pull upstream</code> to update my local repository with respect to <code>upstream</code>. It would be also nice to push to <code>origin main</code> with a simple <code>git push -u origin main</code>.
-4 - <code>git checkout dp-gsoc</code> followed by
-5 - <code>git rebase main</code> to update my local branch with the updates from <code>upstream main</code></p>
+<ol>
+<li><code>git commit</code> my progress. I don&rsquo;t have to push to <code>origin</code> yet!</li>
+<li><code>git checkout main</code> to go back to main and</li>
+<li><code>git pull upstream</code> to update my local repository with respect to <code>upstream</code>. It would be also nice to push to <code>origin main</code> with a simple <code>git push -u origin main</code>.</li>
+<li><code>git checkout dp-gsoc</code> followed by</li>
+<li><code>git rebase main</code> to update my local branch with the updates from <code>upstream main</code></li>
+</ol>
 <p>This is a failed-proof method since I am currently working on a brand new submodule, so I don&rsquo;t expect to encounter any merge conflicts 😅</p>
 <h4 id="2---asking-questions">2 - Asking questions</h4>
 <p>Asking the right and right number of questions has also not been easy. I can spend countless hours asking PyMC developpers and contributors for pointers and answers, but, in many instances, I just often have a feeling that my questions are too &ldquo;basic&rdquo;. This &ldquo;imposter syndrome&rdquo; feeling is not fun, but I try very hard to go through all (if not most) of the documentation before asking any questions. However, if I&rsquo;m stuck for any longer, I feel that I should not hesitate.</p>
