@@ -14,6 +14,14 @@
     
     <item>
       <title>git rebase, git commit, git teach me how to contribute to open source</title>
+      <link>https://www.larrydong.com/gsoc2021/gsoc-week-1-2-3/</link>
+      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.larrydong.com/gsoc2021/gsoc-week-1-2-3/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git rebase, git commit, git teach me how to contribute to open source</title>
       <link>https://www.larrydong.com/gsoc2021/community-bonding-week-3-4/</link>
       <pubDate>Thu, 03 Jun 2021 00:00:00 +0000</pubDate>
       <guid>https://www.larrydong.com/gsoc2021/community-bonding-week-3-4/</guid>
@@ -27,7 +35,7 @@
 &lt;li&gt;&lt;code&gt;git checkout main&lt;/code&gt; to go back to main and&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git pull upstream&lt;/code&gt; to update my local repository with respect to &lt;code&gt;upstream&lt;/code&gt;. It would be also nice to push to &lt;code&gt;origin main&lt;/code&gt; with a simple &lt;code&gt;git push -u origin main&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;git checkout dp-gsoc&lt;/code&gt; followed by&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;git rebase main&lt;/code&gt; to update my local branch with the updates from &lt;code&gt;upstream main&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git merge main&lt;/code&gt; to update my local branch with the updates from &lt;code&gt;upstream main&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;This is a failed-proof method since I am currently working on a brand new submodule, so I don&amp;rsquo;t expect to encounter any merge conflicts 😅&lt;/p&gt;
 &lt;h4 id=&#34;2---asking-questions&#34;&gt;2 - Asking questions&lt;/h4&gt;
