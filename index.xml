@@ -5,20 +5,12 @@
     <link>https://www.larrydong.com/</link>
       <atom:link href="https://www.larrydong.com/index.xml" rel="self" type="application/rss+xml" />
     <description>Larry Dong</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright><lastBuildDate>Wed, 30 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021 Larry Dong</copyright><lastBuildDate>Thu, 03 Jun 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>img/map[gravatar:%!s(bool=false) shape:circle]</url>
       <title>Larry Dong</title>
       <link>https://www.larrydong.com/</link>
     </image>
-    
-    <item>
-      <title>:turtle: The slump...</title>
-      <link>https://www.larrydong.com/gsoc2021/gsoc-week-1-2-3/</link>
-      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
-      <guid>https://www.larrydong.com/gsoc2021/gsoc-week-1-2-3/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>git rebase, git commit, git teach me how to contribute to open source</title>
