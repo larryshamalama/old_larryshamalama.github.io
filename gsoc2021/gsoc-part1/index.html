@@ -596,9 +596,15 @@ with pm.Model() as model:
 <p>\begin{align*}
 v_h = \frac{w_h}{1 - \sum_{\ell &lt; h} w_\ell} .
 \end{align*}</p>
-<h2 id="mistake-3-diving-too-deep-into-theory">Mistake 3: Diving too deep into theory</h2>
-<p>The mathematical properties of Dirichlet processes and how they work on paper is very important, don&rsquo;t get me wrong. However, it is equally important to think about how these can translate into code and can be programmed using the PyMC3 lingo. There are many specifics about Dirichlet processes that I can effectively ignore without it affecting my learning process and implementation in code: what exactly is a random probability measure, convergence via the Bernstein-Von Mises theorem, reading original published papers decades ago, etc.</p>
+<h2 id="mistake-3-looking-to-closely-to-the-gaussian-process-submodule">Mistake 3: Looking to closely to the Gaussian process submodule</h2>
+<p>Here is the 
+<a href="https://github.com/pymc-devs/pymc3/tree/main/pymc3/gp" target="_blank" rel="noopener">submodule</a> and some 
+<a href="https://docs.pymc.io/Gaussian_Processes.html" target="_blank" rel="noopener">documentation</a>. Gaussian processes are similar to Dirichlet processes in that they are formally stochastic processes and allow users to posit little restrictions regarding the functional form of the estimand. From a practical perspective, Gaussian processes can be used as priors over arbitrary continuous functions whereas Dirichlet processes can serve as priors for distributions. However, when it comes to their implementation (especially in PyMC3/Aesara), the way how Gaussian processes deal with infinitum is different to the way how Dirichlet processes handles this notion. Broadly speaking, the Gaussian process submodule centers around providing <code>Xs</code>, locations where we have observations, and providing inference for <code>Xnew</code>. However, I initially thought about doing the same thing for Dirichlet processes in that, given observations <code>Xs</code> from a distribution $G$ of interest, I can output inference on &ldquo;atomic distributions&rdquo; or, differently put, performing inference on $P(G \leq g | X)$ for selected values of $g$ (similarly to <code>Xnew</code> for Gaussian processes).</p>
 <h4 id="solution-to-mistake-3"><em>Solution to Mistake 3</em></h4>
+<p>Dirichlet processes can be represented by a specifically constructed infinite sum (see math notes below). However, in practice (i.e. in code), our computers <strong>cannot</strong> sum up infinite terms hence we can truncate the sum at some large enough value $K$. That being said, a likelihood can be written out for a single sample from a Dirichlet process and, hopefully, have the base class of a <code>DirichletProcess</code> inherent from <code>Distribution</code> such that observed values can still be conditioned upon using an <code>obs=...</code> argument (like all other distributions in PyMC3) (API design to be discussed in the coming weeks&hellip;).</p>
+<h2 id="mistake-4-diving-too-deep-into-theory">Mistake 4: Diving too deep into theory</h2>
+<p>The mathematical properties of Dirichlet processes and how they work on paper is very important, don&rsquo;t get me wrong. However, it is equally important to think about how these can translate into code and can be programmed using the PyMC3 lingo. There are many specifics about Dirichlet processes that I can effectively ignore without it affecting my learning process and implementation in code: what exactly is a random probability measure, convergence via the Bernstein-Von Mises theorem, reading original published papers decades ago, etc.</p>
+<h4 id="solution-to-mistake-4"><em>Solution to Mistake 4</em></h4>
 <p>Gaging what&rsquo;s enough of theory can be difficult, but my understanding is that here is short list what I need to know from the mathematical side:</p>
 <ul>
 <li>Stick-breaking construction of Dirichlet process;</li>
@@ -609,15 +615,24 @@ v_h = \frac{w_h}{1 - \sum_{\ell &lt; h} w_\ell} .
 </ul>
 <p>Also, I can also look at the 
 <a href="https://cran.r-project.org/web/packages/dirichletprocess/dirichletprocess.pdf" target="_blank" rel="noopener"><code>dirichletprocess</code></a> package in R. Not only is it well-documented, but it can also serve as a inspiration in constructing the PyMC3 submodule.</p>
-<h2 id="mistake-4-running-in-circles-and-asking-the-wrong-questions">Mistake 4: Running in circles and asking the wrong questions</h2>
+<h2 id="mistake-5-running-in-circles-and-asking-the-wrong-questions">Mistake 5: Running in circles and asking the wrong questions</h2>
 <p>When I would meet with my mentors, I would have a laundry list of questions, but I wouldn&rsquo;t have anything to share (document, plots, agenda). Asking questions is good, but it would be more beneficial to organize something more systematic such that meetings can be more efficient and my ideas can be shared more clearly. When asking questions to the PyMC community, I tend to be already overwhelmed and my thoughts aren&rsquo;t properly conveyed. For instance, a question that is often asked as a reply to me is: &ldquo;Can you show an example?&rdquo;</p>
-<h4 id="solution-to-mistake-4"><em>Solution to Mistake 4</em></h4>
+<h4 id="solution-to-mistake-5"><em>Solution to Mistake 5</em></h4>
 <p>Although I have been recommended to ask once I spend beyond 20 minutes trying to debug something, it is equally or even more important to have some prepared that showcases my question via code and/or plots. For instance, here is a 
 <a href="https://github.com/larryshamalama/pymc3-playground/pull/1" target="_blank" rel="noopener">PR</a> where I ask about shapes in building a stick-breaking Aesara <code>RandomVariable</code> class. I also drafted a meeting 
 <a href="https://github.com/larryshamalama/pymc3-playground/blob/master/gsoc-meetings/july-15-2021.md" target="_blank" rel="noopener">agenda</a> in preparation for my meeting with my mentors, a 
 <a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/dp-posterior.ipynb" target="_blank" rel="noopener">notebook</a> on what I think is working well and other 
 <a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/dp-mixture.ipynb" target="_blank" rel="noopener">notebook</a>
-<a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/test-potential.ipynb" target="_blank" rel="noopener">s</a> on what is not working as well as I would have liked.</p>
+<a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/test-potential.ipynb" target="_blank" rel="noopener">s</a> on what is not working as well as I would have liked. Moving forward, I intend to use these tools to better communicate my questions and show my ongoing progress.</p>
+<h2 id="mistake-6-injuring-myself-on-sunday">Mistake 6: Injuring myself on Sunday&hellip;</h2>
+<img src="slack.png" width="75%">
+<p>turned into:</p>
+<img src="skatepark-hospital.png" width="75%">
+<p>from a trip to the skatepark&hellip; Unsurprinsingly, I was not very productive later that evening nor the following day. Luckily, no bones were broken! 💪</p>
+<h4 id="solution-to-mistake-6"><em>Solution to Mistake 6</em></h4>
+<p>As prescribed by the doctor, rehabilitation at the sports, some ankle exercises and no more skating for the next few weeks (if not months)&hellip; 😕</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>Last but not least, imposter syndrome can feel very real and we all make progress at different rates. It is important to stay optimistic regarding my progress and my mentors (Austin and Chris) have been very supportive. Especially for a project and this opportunity that I care deeply about, I am motivated to keep learning, make even more mistakes and, hopefully one day, have a Dirichlet process submodule ready to be launched for public use.</p>
 <h1 id="continuation-of-math-notes">Continuation of Math Notes</h1>
 <p>As said above, diving too deep into the theory can lead to an endless recursion of readings. However, understanding what Dirichlet processes are is important!</p>
 <h4 id="22-dirichlet-process">2.2 Dirichlet Process</h4>
