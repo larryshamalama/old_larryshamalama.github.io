@@ -596,7 +596,7 @@ with pm.Model() as model:
 <p>\begin{align*}
 v_h = \frac{w_h}{1 - \sum_{\ell &lt; h} w_\ell} .
 \end{align*}</p>
-<h2 id="mistake-3-looking-to-closely-to-the-gaussian-process-submodule">Mistake 3: Looking to closely to the Gaussian process submodule</h2>
+<h2 id="mistake-3-looking-too-closely-to-the-gaussian-process-submodule">Mistake 3: Looking too closely to the Gaussian process submodule</h2>
 <p>Here is the 
 <a href="https://github.com/pymc-devs/pymc3/tree/main/pymc3/gp" target="_blank" rel="noopener">submodule</a> and some 
 <a href="https://docs.pymc.io/Gaussian_Processes.html" target="_blank" rel="noopener">documentation</a>. Gaussian processes are similar to Dirichlet processes in that they are formally stochastic processes and allow users to posit little restrictions regarding the functional form of the estimand. From a practical perspective, Gaussian processes can be used as priors over arbitrary continuous functions whereas Dirichlet processes can serve as priors for distributions. However, when it comes to their implementation (especially in PyMC3/Aesara), the way how Gaussian processes deal with infinitum is different to the way how Dirichlet processes handles this notion. Broadly speaking, the Gaussian process submodule centers around providing <code>Xs</code>, locations where we have observations, and providing inference for <code>Xnew</code>. However, I initially thought about doing the same thing for Dirichlet processes in that, given observations <code>Xs</code> from a distribution $G$ of interest, I can output inference on &ldquo;atomic distributions&rdquo; or, differently put, performing inference on $P(G \leq g | X)$ for selected values of $g$ (similarly to <code>Xnew</code> for Gaussian processes).</p>
