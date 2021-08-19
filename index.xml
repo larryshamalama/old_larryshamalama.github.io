@@ -13,6 +13,61 @@
     </image>
     
     <item>
+      <title>Work Product Submission Guidelines</title>
+      <link>https://www.larrydong.com/gsoc2021/gsoc-final/</link>
+      <pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.larrydong.com/gsoc2021/gsoc-final/</guid>
+      <description>&lt;p&gt;This post effectively marks the end of my GSoC experience, but just the beginning of my project. As per the 
+&lt;a href=&#34;https://developers.google.com/open-source/gsoc/help/work-product&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Work Submission Guidelines&lt;/a&gt;, detailed here are my contributions.&lt;/p&gt;
+&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+&lt;p&gt;The goal of my project is to build a submodule on Dirichlet Processes, a Bayesian nonparametric method for the estimation of probability distributions. I have worked on many aspects that would benefit the submodule, but &lt;strong&gt;no&lt;/strong&gt; pull requests will be merged into the main branch by the end of the summer.&lt;/p&gt;
+&lt;h1 id=&#34;1---testing&#34;&gt;1 - Testing&lt;/h1&gt;
+&lt;p&gt;We spent a good portion of the summer discussing about testing for two reasons: (1) tests can serve as checks for my understanding of statistical theory and what I want my code to accomplish and (2) visual tests will ultimately turn into unit tests, which will be integrated in the CD/CI pipeline.&lt;/p&gt;
+&lt;h3 id=&#34;1a---generating-the-right-data&#34;&gt;1.A - Generating the right data&lt;/h3&gt;
+&lt;p&gt;Notebook: &lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-multiple-dp-samples.ipynb&#34;&gt;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-multiple-dp-samples.ipynb&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dirichlet processes are specified by two things: a concentration parameter &lt;code&gt;M&lt;/code&gt; and a base distribution &lt;code&gt;G0&lt;/code&gt;. The first step was to design a visual test that can retrieve the concentration parameter. For instance, if we defined &lt;code&gt;G0&lt;/code&gt; to be $\mathcal{N}(5, 3^2)$, we can attempt to retrieve the mean of &lt;code&gt;mu = 5&lt;/code&gt; via the following test:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-{python}&#34;&gt;mu = 5
+
+rng = np.random.RandomState(seed=34)
+x = rng.normal(loc=2., scale=2., size=[1000,])
+
+with pm.Model() as model:
+    µ = pm.Normal(&amp;quot;µ&amp;quot;, mu=0., sigma=5.)
+    G0 = pm.Normal(&amp;quot;G0&amp;quot;, mu=µ, sigma=2., observed=x)
+
+    trace = pm.sample(draws=1000, chains=1)
+
+_ = pm.plot_trace(trace)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and, lastly, &lt;code&gt;trace.to_dict()[&amp;quot;posterior&amp;quot;][&amp;quot;µ&amp;quot;].mean()&lt;/code&gt; should evaluate to be close to 5. Inference on stick-breaking weights can be a tad more challenging, but it is still possible. Running the reverse stick-breaking function on weights that sum to 1, we can retrieve the concentration parameter as followed:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-{python}&#34;&gt;rng = np.random.RandomState(seed=34)
+betas = rng.beta(1., 5., size=[1000, 20])
+weights = stick_breaking(betas)
+
+recovered_betas = stick_glueing(weights)
+
+with pm.Model() as model:
+    α = pm.Uniform(&amp;quot;α&amp;quot;, 0., 10.)
+    β = pm.Beta(&amp;quot;β&amp;quot;, 1., α, shape=(20,), observed=recovered_betas)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The notebook linked above combines both visual tests mentioned here. While it may seem redundant to obtain &lt;code&gt;weights&lt;/code&gt; from &lt;code&gt;betas&lt;/code&gt; and retrieve the latter back using &lt;code&gt;stick_glueing&lt;/code&gt;, the two-level sampling below uses weights estimated using empirical frequencies of observed atoms. A preliminary first step was to get the tests here correct (which took me a while&amp;hellip;).&lt;/p&gt;
+&lt;h5 id=&#34;precision-issues&#34;&gt;Precision Issues&lt;/h5&gt;
+&lt;p&gt;Notebook:&lt;/p&gt;
+&lt;p&gt;When generating weights, the data-generating code above is prone to fail&lt;/p&gt;
+&lt;h3 id=&#34;1b---two-level-sampling&#34;&gt;1.B - Two-level sampling&lt;/h3&gt;
+&lt;h5 id=&#34;large-k-small-n_dp&#34;&gt;Large &lt;code&gt;K&lt;/code&gt;, small &lt;code&gt;N_dp&lt;/code&gt;&lt;/h5&gt;
+&lt;h5 id=&#34;no-ordering&#34;&gt;No ordering&lt;/h5&gt;
+&lt;p&gt;Larger values of &lt;code&gt;K&lt;/code&gt; and smaller values&lt;/p&gt;
+&lt;h1 id=&#34;2---creating-a-stickbreakingweights-randomvariable&#34;&gt;2 - Creating a StickBreakingWeights &lt;code&gt;RandomVariable&lt;/code&gt;&lt;/h1&gt;
+&lt;h1 id=&#34;3---the-dirichletprocess-class-an-ongoing-effort&#34;&gt;3 - The &lt;code&gt;DirichletProcess&lt;/code&gt; class: an ongoing effort&amp;hellip;&lt;/h1&gt;
+&lt;p&gt;See work-in-progress PR 
+&lt;a href=&#34;&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
+&lt;p&gt;I am extremely grateful for this enriching opportunity and the support from my mentors Austin and Chris. Being a graduate student who&amp;rsquo;s primary goal is to understand statistical theory and do research, this experience has allowed me to strengthen my programming skills, but especially discover . While I am disappointed with my progress this summer, I am confident that I will be able to get this submodule to work, with time. And I am determined to do so in the coming months.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>🐢 The slump...</title>
       <link>https://www.larrydong.com/gsoc2021/gsoc-part1/</link>
       <pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate>
@@ -112,6 +167,19 @@ v_h = \frac{w_h}{1 - \sum_{\ell &amp;lt; h} w_\ell} .
 &lt;p&gt;As said above, diving too deep into the theory can lead to an endless recursion of readings. However, understanding what Dirichlet processes are is important!&lt;/p&gt;
 &lt;h4 id=&#34;22-dirichlet-process&#34;&gt;2.2 Dirichlet Process&lt;/h4&gt;
 &lt;p&gt;Temporary placeholder: Coming up! I need to study a bit for my upcoming exam first&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>💪 Making Progress: Sampling, Testing and Documentation</title>
+      <link>https://www.larrydong.com/gsoc2021/gsoc-part2/</link>
+      <pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate>
+      <guid>https://www.larrydong.com/gsoc2021/gsoc-part2/</guid>
+      <description>&lt;p&gt;With the end of GSoC 2021 in sight, I thought that I would compile a penultimate post summarizing more challenges that I have encountered.&lt;/p&gt;
+&lt;p&gt;A &lt;strong&gt;LOT&lt;/strong&gt; of time was spent just better understanding Dirichlet processes, but especially how to (1) implement them using code (see )&lt;/p&gt;
+&lt;h3 id=&#34;1---git-pull-over-git-rebase-for-open-source&#34;&gt;1 - &lt;code&gt;git pull&lt;/code&gt; over &lt;code&gt;git rebase&lt;/code&gt; for open-source&lt;/h3&gt;
+&lt;h3 id=&#34;2---what-are-atoms&#34;&gt;2 - What are atoms?&lt;/h3&gt;
+&lt;h3 id=&#34;3---two-level-sampling&#34;&gt;3 - Two-level sampling&lt;/h3&gt;
 </description>
     </item>
     
