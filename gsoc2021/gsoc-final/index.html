@@ -233,7 +233,7 @@
   
   <meta property="og:site_name" content="Larry Dong">
   <meta property="og:url" content="https://www.larrydong.com/gsoc2021/gsoc-final/">
-  <meta property="og:title" content="Work Product Submission Guidelines | Larry Dong">
+  <meta property="og:title" content="Work Product Submission | Larry Dong">
   <meta property="og:description" content="Here is a summary of my ongoing work and contributions"><meta property="og:image" content="img/map[gravatar:%!s(bool=false) shape:circle]">
   <meta property="twitter:image" content="img/map[gravatar:%!s(bool=false) shape:circle]"><meta property="og:locale" content="en-us">
   
@@ -259,7 +259,7 @@
 
 
 
-  <title>Work Product Submission Guidelines | Larry Dong</title>
+  <title>Work Product Submission | Larry Dong</title>
 
 </head>
 
@@ -483,10 +483,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>Work Product Submission Guidelines</h1>
+  <h1>Work Product Submission</h1>
 
   
-  <p class="page-subtitle">The End of GSoC 2021</p>
+  <p class="page-subtitle">The End of GSoC 2021 🎈</p>
   
 
   
@@ -579,18 +579,31 @@ with pm.Model() as model:
 </code></pre>
 <p>The notebook linked above combines both visual tests mentioned here. While it may seem redundant to obtain <code>weights</code> from <code>betas</code> and retrieve the latter back using <code>stick_glueing</code>, the two-level sampling below uses weights estimated using empirical frequencies of observed atoms. A preliminary first step was to get the tests here correct (which took me a while&hellip;).</p>
 <h5 id="precision-issues">Precision Issues</h5>
-<p>Notebook:</p>
-<p>When generating weights, the data-generating code above is prone to fail</p>
+<p>Notebook: <a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/shortcomings/replicate-precision-error.ipynb">https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/shortcomings/replicate-precision-error.ipynb</a></p>
+<p>When generating weights, the data-generating code above is prone to producing negative weight values due to precision issues. Weights are generally decreasing in value and, especially with a small concentration parameter, floating point accuracy may be lost for the smallest weights. This is mostly fine for several reasons:</p>
+<ul>
+<li>The exercise here was to write tests. We can easily use a brute force solution of discarding generated weights falling out of the (0, 1) range.</li>
+<li>In practice, the concentration parameter is often above 1. During posterior updating, the concentration parameter is incremented by the number of observations on which we condition on.</li>
+<li>This seems to be a practical issue; warnings can be raised during API design in case sampling is prone to fail.</li>
+</ul>
 <h3 id="1b---two-level-sampling">1.B - Two-level sampling</h3>
+<p>Notebook: <a href="https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-two-level-sampling.ipynb">https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-two-level-sampling.ipynb</a></p>
+<p>While weights are generated, they are often not known in practice. However, we can estimate them empirically by sampling from the sampled distribution from a Dirichlet Process (prior or posterior).</p>
 <h5 id="large-k-small-n_dp">Large <code>K</code>, small <code>N_dp</code></h5>
+<p>Performing inference on the concentration parameter and base distribution parameters goes well given that all K atoms sampled from the base distribution is observed at least once in the DP sample. This is often not the case, and it shouldn&rsquo;t be because, in a Dirichlet Process Mixture, we want atoms to be unobserved such that the number of clusters can be inferred probabilistically. However, for testing purposes, this issue can be circumvented by discarding all multinomial DP samples with unobserved atoms. This phenomenon is increasing likely with larger <code>K</code> and smaller <code>N_dp</code> values.</p>
 <h5 id="no-ordering">No ordering</h5>
-<p>Larger values of <code>K</code> and smaller values</p>
+<p>While weights are decreasing in expectation, it is important to <strong>not</strong> order them when performing the unstick-breaking process. Otherwise, our results will be biased and posterior inference would not be valid.</p>
 <h1 id="2---creating-a-stickbreakingweights-randomvariable">2 - Creating a StickBreakingWeights <code>RandomVariable</code></h1>
+<p>See local 
+<a href="https://github.com/larryshamalama/pymc3-playground/pull/1/files" target="_blank" rel="noopener">PR</a></p>
+<p>The version 4 refactoring process uses a slightly different design for the <code>RandomVariable</code> class. As such, I attempt to create a class specifically for (truncated) stick-breaking weights as this will be very useful for the implementation of Dirichlet Processes. However, even with some feedback from the community, the distribution is not functional&hellip; yet!</p>
 <h1 id="3---the-dirichletprocess-class-an-ongoing-effort">3 - The <code>DirichletProcess</code> class: an ongoing effort&hellip;</h1>
 <p>See work-in-progress PR 
-<a href="">here</a>.</p>
+<a href="https://github.com/pymc-devs/pymc3/pull/4809#pullrequestreview-730223460" target="_blank" rel="noopener">here</a> and everything else 
+<a href="https://github.com/larryshamalama/pymc3-playground" target="_blank" rel="noopener">here</a>.</p>
+<p>Building a submodule for Dirichlet Processes will be an ongoing effort that I hope to accomplish in the coming months. I know that it is possible and that I can do it. However, there are still many things to learn and many challenges inherent to the statistical methodology that I have yet to face. Above all, we must come up with an intuitive API design which is completely foreign territory for me. The PR serves more to seek feedback and direction from my mentors and more experienced members of the PyMC community and my personal repository showcases my ongoing progress, no matter how small.</p>
 <h3 id="final-comments">Final Comments</h3>
-<p>I am extremely grateful for this enriching opportunity and the support from my mentors Austin and Chris. Being a graduate student who&rsquo;s primary goal is to understand statistical theory and do research, this experience has allowed me to strengthen my programming skills, but especially discover . While I am disappointed with my progress this summer, I am confident that I will be able to get this submodule to work, with time. And I am determined to do so in the coming months.</p>
+<p>I am extremely grateful for this enriching opportunity and the support from my mentors Austin and Chris. Being a graduate student who&rsquo;s primary goal is to understand statistical theory and do research, this experience has allowed me to strengthen my programming skills, but especially discover so many unexplored areas of software design and open source development. While I am disappointed with my progress this summer, I am confident that I will be able to get this submodule to work. And I am determined to do so in the coming months. Stay tuned! 🚀</p>
 
     </div>
 

@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Work Product Submission Guidelines</title>
+      <title>Work Product Submission</title>
       <link>https://www.larrydong.com/gsoc2021/gsoc-final/</link>
       <pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate>
       <guid>https://www.larrydong.com/gsoc2021/gsoc-final/</guid>
@@ -52,121 +52,31 @@ with pm.Model() as model:
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The notebook linked above combines both visual tests mentioned here. While it may seem redundant to obtain &lt;code&gt;weights&lt;/code&gt; from &lt;code&gt;betas&lt;/code&gt; and retrieve the latter back using &lt;code&gt;stick_glueing&lt;/code&gt;, the two-level sampling below uses weights estimated using empirical frequencies of observed atoms. A preliminary first step was to get the tests here correct (which took me a while&amp;hellip;).&lt;/p&gt;
 &lt;h5 id=&#34;precision-issues&#34;&gt;Precision Issues&lt;/h5&gt;
-&lt;p&gt;Notebook:&lt;/p&gt;
-&lt;p&gt;When generating weights, the data-generating code above is prone to fail&lt;/p&gt;
+&lt;p&gt;Notebook: &lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/shortcomings/replicate-precision-error.ipynb&#34;&gt;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/shortcomings/replicate-precision-error.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;When generating weights, the data-generating code above is prone to producing negative weight values due to precision issues. Weights are generally decreasing in value and, especially with a small concentration parameter, floating point accuracy may be lost for the smallest weights. This is mostly fine for several reasons:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The exercise here was to write tests. We can easily use a brute force solution of discarding generated weights falling out of the (0, 1) range.&lt;/li&gt;
+&lt;li&gt;In practice, the concentration parameter is often above 1. During posterior updating, the concentration parameter is incremented by the number of observations on which we condition on.&lt;/li&gt;
+&lt;li&gt;This seems to be a practical issue; warnings can be raised during API design in case sampling is prone to fail.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;1b---two-level-sampling&#34;&gt;1.B - Two-level sampling&lt;/h3&gt;
+&lt;p&gt;Notebook: &lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-two-level-sampling.ipynb&#34;&gt;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/step-by-step/test-two-level-sampling.ipynb&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;While weights are generated, they are often not known in practice. However, we can estimate them empirically by sampling from the sampled distribution from a Dirichlet Process (prior or posterior).&lt;/p&gt;
 &lt;h5 id=&#34;large-k-small-n_dp&#34;&gt;Large &lt;code&gt;K&lt;/code&gt;, small &lt;code&gt;N_dp&lt;/code&gt;&lt;/h5&gt;
+&lt;p&gt;Performing inference on the concentration parameter and base distribution parameters goes well given that all K atoms sampled from the base distribution is observed at least once in the DP sample. This is often not the case, and it shouldn&amp;rsquo;t be because, in a Dirichlet Process Mixture, we want atoms to be unobserved such that the number of clusters can be inferred probabilistically. However, for testing purposes, this issue can be circumvented by discarding all multinomial DP samples with unobserved atoms. This phenomenon is increasing likely with larger &lt;code&gt;K&lt;/code&gt; and smaller &lt;code&gt;N_dp&lt;/code&gt; values.&lt;/p&gt;
 &lt;h5 id=&#34;no-ordering&#34;&gt;No ordering&lt;/h5&gt;
-&lt;p&gt;Larger values of &lt;code&gt;K&lt;/code&gt; and smaller values&lt;/p&gt;
+&lt;p&gt;While weights are decreasing in expectation, it is important to &lt;strong&gt;not&lt;/strong&gt; order them when performing the unstick-breaking process. Otherwise, our results will be biased and posterior inference would not be valid.&lt;/p&gt;
 &lt;h1 id=&#34;2---creating-a-stickbreakingweights-randomvariable&#34;&gt;2 - Creating a StickBreakingWeights &lt;code&gt;RandomVariable&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;See local 
+&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/pull/1/files&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PR&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The version 4 refactoring process uses a slightly different design for the &lt;code&gt;RandomVariable&lt;/code&gt; class. As such, I attempt to create a class specifically for (truncated) stick-breaking weights as this will be very useful for the implementation of Dirichlet Processes. However, even with some feedback from the community, the distribution is not functional&amp;hellip; yet!&lt;/p&gt;
 &lt;h1 id=&#34;3---the-dirichletprocess-class-an-ongoing-effort&#34;&gt;3 - The &lt;code&gt;DirichletProcess&lt;/code&gt; class: an ongoing effort&amp;hellip;&lt;/h1&gt;
 &lt;p&gt;See work-in-progress PR 
-&lt;a href=&#34;&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;a href=&#34;https://github.com/pymc-devs/pymc3/pull/4809#pullrequestreview-730223460&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and everything else 
+&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Building a submodule for Dirichlet Processes will be an ongoing effort that I hope to accomplish in the coming months. I know that it is possible and that I can do it. However, there are still many things to learn and many challenges inherent to the statistical methodology that I have yet to face. Above all, we must come up with an intuitive API design which is completely foreign territory for me. The PR serves more to seek feedback and direction from my mentors and more experienced members of the PyMC community and my personal repository showcases my ongoing progress, no matter how small.&lt;/p&gt;
 &lt;h3 id=&#34;final-comments&#34;&gt;Final Comments&lt;/h3&gt;
-&lt;p&gt;I am extremely grateful for this enriching opportunity and the support from my mentors Austin and Chris. Being a graduate student who&amp;rsquo;s primary goal is to understand statistical theory and do research, this experience has allowed me to strengthen my programming skills, but especially discover . While I am disappointed with my progress this summer, I am confident that I will be able to get this submodule to work, with time. And I am determined to do so in the coming months.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>🐢 The slump...</title>
-      <link>https://www.larrydong.com/gsoc2021/gsoc-part1/</link>
-      <pubDate>Sat, 17 Jul 2021 00:00:00 +0000</pubDate>
-      <guid>https://www.larrydong.com/gsoc2021/gsoc-part1/</guid>
-      <description>&lt;p&gt;With half of GSoC behind me (already!), progress in the past few weeks have been embarrassingly slow. The first challenge is learning how to learn. As I wrote in my previous post, there is so much that I don&amp;rsquo;t know; while this is inherently one of the exciting aspects of GSoC, it can be daunting to run around in circles. From the testing in the CD/CI pipeline to writing a likelihood for a sample from a Dirichlet Process, the first 5 weeks of GSoC have been invested into making mistakes. As my mentors have said in the first evaluation: &amp;ldquo;We encourage him to continue to focus on quantity rather than quality, and don&amp;rsquo;t be afraid to make mistakes &amp;ndash; a ton of learning occurs from iterating on code.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;Although I have little code to actually talk about, here is a rundown of &amp;ldquo;mistakes&amp;rdquo; that I learned during the past weeks.&lt;/p&gt;
-&lt;h2 id=&#34;mistake-1-attempting-to-get-too-involved-with-version-4-refactoring-of-pymc3&#34;&gt;Mistake 1: Attempting to get too involved with version 4 refactoring of PyMC3&lt;/h2&gt;
-&lt;p&gt;PyMC3 is currently undergoing a refactoring process converting its backend structure to 
-&lt;a href=&#34;https://github.com/aesara-devs/aesara&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Aesara&lt;/a&gt; which, frankly, is difficult to wrap my head around. My attempt to refactor the $\chi^2$ distribution (see PR 
-&lt;a href=&#34;https://github.com/aesara-devs/aesara/pull/414&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt; and 
-&lt;a href=&#34;https://github.com/pymc-devs/pymc3/pull/4695&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;) was an &amp;ldquo;easy&amp;rdquo; exercise that took a long time to figure out during the (pre-)community bonding phase. Dirichlet processes are often used to model the latent parameter in mixture models such that the number of clusters need not to be specified. However, with &lt;code&gt;pm.Mixture&lt;/code&gt; and &lt;code&gt;pm.DensityDist&lt;/code&gt; needing refactoring, I initially wanted to challenge myself to help write an &lt;code&gt;rv_op&lt;/code&gt; for mixture models, but it turns out to be quite challenging (see PR 
-&lt;a href=&#34;https://github.com/aesara-devs/aeppl/pull/19&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;).&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-1&#34;&gt;&lt;em&gt;Solution to Mistake 1&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Rather than spend time figuring out how to rewrite a mixture &lt;code&gt;rv_op&lt;/code&gt;, it is more worthwhile to spend my time implementing a single class for Dirichlet processes (mixtures) and leverage &lt;code&gt;pm.Mixture&lt;/code&gt; once it has been refactored. Dirichlet processes are complicated on its own, so it is okay that I solely focus on them.&lt;/p&gt;
-&lt;h2 id=&#34;mistake-2-coding-dirichlet-processes-without-a-likelihood&#34;&gt;Mistake 2: Coding Dirichlet processes without a likelihood&lt;/h2&gt;
-&lt;p&gt;PyMC3 relies on using &lt;code&gt;pm.Model()&lt;/code&gt; as a context manager such that distributions can be posited on random variables and parameters. Given that a Dirichlet process $G$ can be rewritten as:&lt;/p&gt;
-&lt;p&gt;\begin{align*}
-G(x) = \sum_{h=1}^{\infty} w_h \delta_{m_h}(x)
-\end{align*}&lt;/p&gt;
-&lt;p&gt;for sticks $w_h$ and atoms $m_h$ (see below for more mathematical details), this is exactly what I coded using Aesara operations, which are very similar to NumPy ones.&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import pymc3 as pm
-import numpy as np
-import aesara.tensor as at
-
-def stick_breaking(betas):
-    sticks = at.concatenate([[1], at.cumprod(1 - betas[:-1])])
-
-    return betas * sticks
-
-Xs = np.array([-1, 0, 0.5, 1, 2])[..., np.newaxis]
-K = 19 # number of sticks
-
-with pm.Model() as model:
-    betas = pm.Beta(&amp;quot;betas&amp;quot;, 1., np.ones(shape=(K,)))
-    weights = pm.Deterministic(&amp;quot;weights&amp;quot;, stick_breaking(betas))
-    G0 = pm.Normal(&amp;quot;base-dist&amp;quot;, 0, 1)
-
-    dirac = at.lt(G0, Xs)
-    linear_comb = at.sum(at.mul(weights, dirac), axis=1)
-
-    prior_atoms = pm.Deterministic(
-        name=&amp;quot;dp-prior&amp;quot;,
-        var=linear_comb,
-    )
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;It worked, but the issue is that &lt;code&gt;pm.Deterministic&lt;/code&gt; does not have a likelihood of its own. PyMC3 revolves around building a likelihood behind the scenes on which Hamiltonian Monte Carlo sampling methods can be executed. While the code above works, it is not the right direction when it comes to building an API and integrating it in more complex and potentially hierarchical models.&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-2&#34;&gt;&lt;em&gt;Solution to Mistake 2&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;The solution to this is &amp;ldquo;simply&amp;rdquo; to build a class that implements a likelihood for a Dirichlet process. However, how do we write a likelihood for a sample from a Dirichlet process? Do nonparametric methods, frequentist or Bayesian, have likelihoods? (The answer is yes!)&lt;/p&gt;
-&lt;p&gt;Temporarily leveraging &lt;code&gt;pm.Potential&lt;/code&gt; to posit a likelihood, we design a truncated Dirichlet process (truncated because this is how we need to handle the infinite sum). Although a sample from a Dirichlet process is a &lt;strong&gt;discrete&lt;/strong&gt; distribution, we can evaluate its likelihood at the drawn weights and atoms:&lt;/p&gt;
-&lt;p&gt;\begin{align*}
-\mathcal{L}(M; \pmb{w}, \pmb{m}, G_0) = \prod_{h=1}^K f_{G_0}(m_h) \text{Beta.pdf}(v_h)
-\end{align*}&lt;/p&gt;
-&lt;p&gt;where $f_{G_0}(\cdot)$ is the probability density or mass function of the base distribution $G_0$ and $v_h \stackrel{\small{\text{i.i.d.}}}{\sim} \text{Beta}(1, M)$ for some concentration parameter $M &amp;gt; 0$. However, given weights $w_h = v_h \prod_{\ell &amp;lt; h} (1 - v_\ell)$, we can recover the Beta random variables/realizations:&lt;/p&gt;
-&lt;p&gt;\begin{align*}
-v_h = \frac{w_h}{1 - \sum_{\ell &amp;lt; h} w_\ell} .
-\end{align*}&lt;/p&gt;
-&lt;h2 id=&#34;mistake-3-looking-too-closely-to-the-gaussian-process-submodule&#34;&gt;Mistake 3: Looking too closely to the Gaussian process submodule&lt;/h2&gt;
-&lt;p&gt;Here is the 
-&lt;a href=&#34;https://github.com/pymc-devs/pymc3/tree/main/pymc3/gp&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;submodule&lt;/a&gt; and some 
-&lt;a href=&#34;https://docs.pymc.io/Gaussian_Processes.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;documentation&lt;/a&gt;. Gaussian processes are similar to Dirichlet processes in that they are formally stochastic processes and allow users to posit little restrictions regarding the functional form of the estimand. From a practical perspective, Gaussian processes can be used as priors over arbitrary continuous functions whereas Dirichlet processes can serve as priors for distributions. However, when it comes to their implementation (especially in PyMC3/Aesara), the way how Gaussian processes deal with infinitum is different to the way how Dirichlet processes handles this notion. Broadly speaking, the Gaussian process submodule centers around providing &lt;code&gt;Xs&lt;/code&gt;, locations where we have observations, and providing inference for &lt;code&gt;Xnew&lt;/code&gt;. However, I initially thought about doing the same thing for Dirichlet processes in that, given observations &lt;code&gt;Xs&lt;/code&gt; from a distribution $G$ of interest, I can output inference on &amp;ldquo;atomic distributions&amp;rdquo; or, differently put, performing inference on $P(G \leq g | X)$ for selected values of $g$ (similarly to &lt;code&gt;Xnew&lt;/code&gt; for Gaussian processes).&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-3&#34;&gt;&lt;em&gt;Solution to Mistake 3&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Dirichlet processes can be represented by a specifically constructed infinite sum (see Mistake 2 above). However, in practice (i.e. in code), our computers &lt;strong&gt;cannot&lt;/strong&gt; sum up infinite terms hence we can truncate the sum at some large enough value $K$. That being said, a likelihood can be written out for a single sample from a Dirichlet process and, hopefully, have the base class of a &lt;code&gt;DirichletProcess&lt;/code&gt; inherent from &lt;code&gt;Distribution&lt;/code&gt; such that observed values can still be conditioned upon using an &lt;code&gt;obs=...&lt;/code&gt; argument (like all other distributions in PyMC3) (API design to be discussed in the coming weeks&amp;hellip;).&lt;/p&gt;
-&lt;h2 id=&#34;mistake-4-diving-too-deep-into-theory&#34;&gt;Mistake 4: Diving too deep into theory&lt;/h2&gt;
-&lt;p&gt;The mathematical properties of Dirichlet processes and how they work on paper is very important, don&amp;rsquo;t get me wrong. However, it is equally important to think about how these can translate into code and can be programmed using the PyMC3 lingo. There are many specifics about Dirichlet processes that I can effectively ignore without it affecting my learning process and implementation in code: what exactly is a random probability measure, convergence via the Bernstein-Von Mises theorem, reading original published papers decades ago, etc.&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-4&#34;&gt;&lt;em&gt;Solution to Mistake 4&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Gaging what&amp;rsquo;s enough of theory can be difficult, but my understanding is that here is short list what I need to know from the mathematical side:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Stick-breaking construction of Dirichlet process;&lt;/li&gt;
-&lt;li&gt;Marginal and posterior distributions;&lt;/li&gt;
-&lt;li&gt;Dirichlet process mixtures;&lt;/li&gt;
-&lt;li&gt;How Figures 2.1, 2.2 and 2.3 are constructed in 
-&lt;a href=&#34;https://www.springer.com/gp/book/9783319189673&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Müller et al. (2015)&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Also, I can also look at the 
-&lt;a href=&#34;https://cran.r-project.org/web/packages/dirichletprocess/dirichletprocess.pdf&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;&lt;code&gt;dirichletprocess&lt;/code&gt;&lt;/a&gt; package in R. Not only is it well-documented, but it can also serve as a inspiration in constructing the PyMC3 submodule.&lt;/p&gt;
-&lt;h2 id=&#34;mistake-5-running-in-circles-and-asking-the-wrong-questions&#34;&gt;Mistake 5: Running in circles and asking the wrong questions&lt;/h2&gt;
-&lt;p&gt;When I would meet with my mentors, I would have a laundry list of questions, but I wouldn&amp;rsquo;t have anything to share (document, plots, agenda). Asking questions is good, but it would be more beneficial to organize something more systematic such that meetings can be more efficient and my ideas can be shared more clearly. When asking questions to the PyMC community, I tend to be already overwhelmed and my thoughts aren&amp;rsquo;t properly conveyed. For instance, a question that is often asked as a reply to me is: &amp;ldquo;Can you show an example?&amp;rdquo;&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-5&#34;&gt;&lt;em&gt;Solution to Mistake 5&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;Although I have been recommended to ask once I spend beyond 20 minutes trying to debug something, it is equally or even more important to have some prepared that showcases my question via code and/or plots. For instance, here is a 
-&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/pull/1&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;PR&lt;/a&gt; where I ask about shapes in building a stick-breaking Aesara &lt;code&gt;RandomVariable&lt;/code&gt; class. I also drafted a meeting 
-&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/gsoc-meetings/july-15-2021.md&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;agenda&lt;/a&gt; in preparation for my meeting with my mentors, a 
-&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/dp-posterior.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;notebook&lt;/a&gt; on what I think is working well and other 
-&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/dp-mixture.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;notebook&lt;/a&gt;
-&lt;a href=&#34;https://github.com/larryshamalama/pymc3-playground/blob/master/notebooks/test-potential.ipynb&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;s&lt;/a&gt; on what is not working as well as I would have liked. Moving forward, I intend to use these tools to better communicate my questions and show my ongoing progress.&lt;/p&gt;
-&lt;h2 id=&#34;mistake-6-injuring-myself-on-sunday&#34;&gt;Mistake 6: Injuring myself on Sunday&amp;hellip;&lt;/h2&gt;
-&lt;img src=&#34;slack.png&#34; width=&#34;75%&#34;&gt;
-&lt;p&gt;turned into:&lt;/p&gt;
-&lt;img src=&#34;skatepark-hospital.png&#34; width=&#34;75%&#34;&gt;
-&lt;p&gt;from a trip to the skatepark&amp;hellip; Unsurprisingly, I was not very productive later that evening nor the following day. Luckily, no bones were broken! 💪&lt;/p&gt;
-&lt;h4 id=&#34;solution-to-mistake-6&#34;&gt;&lt;em&gt;Solution to Mistake 6&lt;/em&gt;&lt;/h4&gt;
-&lt;p&gt;As prescribed by the doctor, rehabilitation with the physiotherapist, some ankle exercises and no more skating for the next few weeks (if not months)&amp;hellip; 😕&lt;/p&gt;
-&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion&lt;/h2&gt;
-&lt;p&gt;Last but not least, imposter syndrome can feel very real and we all make progress at different rates. It is important to stay optimistic regarding my progress and my mentors (
-&lt;a href=&#34;https://www.austinrochford.com/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Austin&lt;/a&gt; and 
-&lt;a href=&#34;https://twitter.com/fonnesbeck?lang=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Chris&lt;/a&gt;) have been very supportive. Especially for a project and this opportunity that I care deeply about, I am motivated to keep learning, make even more mistakes and, hopefully one day, have a Dirichlet process submodule ready to be launched for public use.&lt;/p&gt;
-&lt;h1 id=&#34;continuation-of-math-notes&#34;&gt;Continuation of Math Notes&lt;/h1&gt;
-&lt;p&gt;As said above, diving too deep into the theory can lead to an endless recursion of readings. However, understanding what Dirichlet processes are is important!&lt;/p&gt;
-&lt;h4 id=&#34;22-dirichlet-process&#34;&gt;2.2 Dirichlet Process&lt;/h4&gt;
-&lt;p&gt;Temporary placeholder: Coming up! I need to study a bit for my upcoming exam first&amp;hellip;&lt;/p&gt;
+&lt;p&gt;I am extremely grateful for this enriching opportunity and the support from my mentors Austin and Chris. Being a graduate student who&amp;rsquo;s primary goal is to understand statistical theory and do research, this experience has allowed me to strengthen my programming skills, but especially discover so many unexplored areas of software design and open source development. While I am disappointed with my progress this summer, I am confident that I will be able to get this submodule to work. And I am determined to do so in the coming months. Stay tuned! 🚀&lt;/p&gt;
 </description>
     </item>
     
