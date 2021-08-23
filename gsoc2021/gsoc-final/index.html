@@ -596,6 +596,28 @@ with pm.Model() as model:
 <h1 id="2---creating-a-stickbreakingweights-randomvariable">2 - Creating a StickBreakingWeights <code>RandomVariable</code></h1>
 <p>See local 
 <a href="https://github.com/larryshamalama/pymc3-playground/pull/1/files" target="_blank" rel="noopener">PR</a></p>
+<pre><code class="language-{python}">class StickBreakingWeightsRV(RandomVariable):
+    name = &quot;stick_breaking_weights&quot;
+    ndim_supp = 1
+    ndims_params = [0]
+    dtype = &quot;floatX&quot;
+    _print_name = (&quot;Stick-Breaking weights&quot;, &quot;\\operatorname{StickBreakingWeights}&quot;)
+
+    def __call__(self, alpha, size=None, **kwargs):
+        return super().__call__(alpha, size=size, **kwargs)
+
+    @classmethod
+    def rng_fn(cls, rng, alpha, size):
+        betas = rng.beta(1, alpha, size=size)
+        sticks = np.concatenate(
+            [
+                [1],
+                np.cumprod(1 - betas[:-1]),
+            ]
+        )
+
+        return betas * sticks
+</code></pre>
 <p>The version 4 refactoring process uses a slightly different design for the <code>RandomVariable</code> class. As such, I attempt to create a class specifically for (truncated) stick-breaking weights as this will be very useful for the implementation of Dirichlet Processes. However, even with some feedback from the community, the distribution is not functional&hellip; yet!</p>
 <h1 id="3---the-dirichletprocess-class-an-ongoing-effort">3 - The <code>DirichletProcess</code> class: an ongoing effort&hellip;</h1>
 <p>See work-in-progress PR 
