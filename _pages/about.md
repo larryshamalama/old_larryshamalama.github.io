@@ -2,23 +2,23 @@
 layout: about
 title: about
 permalink: /
-description: <a href="#">Affiliations</a>. Address. Contacts. Moto. Etc.
+description: I love statistics.
 
 profile:
   align: right
   image: prof_pic.jpg
   address: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+    <p>PhD student in biostatistics @ DLSPH</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+I am second year PhD student in biostatistics at the Dalla Lana School of Public Health at the University of Toronto. My research interests include causal inference, Bayesian methods and their application to observational data. Following my first year of PhD students, I joined [PyMC](https://docs.pymc.io/en/stable/) as a Google Summer of Code student where I worked on developing a Dirichlet Process submodule for the package. 
 
-Put your address / P.O. box / other info right below your picture. You can also disable any these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+I am part of the [Health Data Working Group](https://health-data-working-group.github.io/), a new initiative from some of my peers, professors and myself to provide technical workshops for members of our public health research community. As of October 2021, I am also happy to serve as a GitHub Campus Expert and I hope to lead a series of tutorials on Git and GitHub.
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](http://fortawesome.github.io/Font-Awesome/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+Previously, I have pursued a dual Master's degree: one in biostatistics at McGill University and one in Public Health at the University of Bordeaux. I was jointly supervised by [Dr. Erica Moodie](https://www.ericamoodie.com/) and [Dr. Rodolphe Thiébaut](https://www.bordeaux-population-health.center/profile/rodolphe-thiebaut/), both of whom I look up to greatly and attribute a lot of my personal and professional growth.
+
+I also enjoy coding in Python, skateboarding and eating copious amounts of fruit (especially grapes, bananas, oranges and watermelon). Feel free to connect with me!
