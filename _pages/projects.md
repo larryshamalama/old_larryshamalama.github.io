@@ -3,7 +3,7 @@ layout: page
 title: GSoC 2021
 permalink: /gsoc2021/
 description: Blogposts regarding my 2021 Google Summer of Code experience and the months to follow
-nav: false
+nav: true
 horizontal: true
 ---
 <div class="projects">
