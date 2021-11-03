@@ -1,7 +1,7 @@
 ---
 layout: page
 title: project 4
-description: another without an image
+description: another without an image bla1 bla2 bla3 bla4 bla5
 img:
 importance: 3
 category: fun

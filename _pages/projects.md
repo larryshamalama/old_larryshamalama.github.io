@@ -1,11 +1,10 @@
 ---
 layout: page
-title: projects
-permalink: /projects/
-description: A growing collection of your cool projects.
+title: GSoC 2021
+permalink: /gsoc2021/
+description: Blogposts regarding my 2021 Google Summer of Code experience and the months to follow
 nav: false
-display_categories: [work, fun]
-horizontal: false
+horizontal: true
 ---
 <div class="projects">
   {% if site.enable_project_categories and page.display_categories %}
